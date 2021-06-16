@@ -14,11 +14,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export const OptionButton = (props) => {
-  const { text } = props
+  const { text, onClick } = props
   const classes = useStyles()
   return (
     <React.Fragment>
-      <Button className={classes.button} fullWidth>
+      <Button className={classes.button} fullWidth onClick={onClick}>
         {text}
       </Button>
     </React.Fragment>
