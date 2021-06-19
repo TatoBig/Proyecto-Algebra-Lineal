@@ -3,7 +3,8 @@ import styles from '../styles/Home.module.css'
 import { Button, Paper, makeStyles, Typography, Box, Grid, FormControlLabel, Switch, Slide, Zoom, Grow, Fade, Collapse } from '@material-ui/core/'
 import Card from '../components/visual/Card'
 import { OptionButton } from '../components/visual/Buttons'
-import { motion } from "framer-motion"
+import { motion } from 'framer-motion'
+import Opcion1 from '../components/code/option1'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,11 +75,7 @@ export default function Home() {
         </Zoom>
         <Zoom in={checked === 1} mountOnEnter unmountOnExit>
           <Paper elevation={4} className={classes.paper}>
-            <Typography variant="h1" color="initial">Opción 1</Typography>
-            <OptionButton
-              text="Regresar"
-              onClick={() => handleChange(0)}
-            />
+            <Opcion1/>
           </Paper>
         </Zoom>
         <Zoom in={checked === 2} mountOnEnter unmountOnExit>
