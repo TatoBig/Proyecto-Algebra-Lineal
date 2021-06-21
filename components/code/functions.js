@@ -1,5 +1,6 @@
+import { MatrixDependencies } from 'mathjs'
 import { useState } from 'react'
-
+import { mathjs } from 'react'
 export const useFunctions = () => {
   const [identidad3, setidentidad3] = useState([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
   const [identidad4, setidentidad4] = useState([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
@@ -7,6 +8,7 @@ export const useFunctions = () => {
   let matriz
   //matriz para el primer ejercicio
   let matrizb
+  
   //matriz identidad
   //funcion que recibe la matriz
   const setMatriz = (matriz) => {
@@ -20,6 +22,37 @@ export const useFunctions = () => {
     }
     return nuevaFila
   }
+  //OPCION 1
+  const SolucionPorInvertida = (matriz, b) =>{
+  //  let x; 
+  //  x = Matrix.inmultiply(InvertisMatriz(matriz),b);
+   let ma = Matrix.inmultiply(Matrix.inverse(matriz),b); 
+ //falta que se sumen las filas
+ 
+  }
+  //OPCION 2
+//   Gauss Jordan pseudocodigo
+// 1- Analizar
+// ++si el resultado es verdadero
+// ---multiplicar ese 1 por el numero de abajo
+// ---restar la fila 2 con el resultado de la multiplicacion
+// ---reemplazar la fila 2 con el resultado de la resta
+// ++si el resultado es falso
+// ---tomar la fila con el menor numero en la columna analizada
+// ---dividir toda la fila por ese numero
+// ---multiplicar ese 1 por el numero de abajo
+// ---restar la fila 2 con el resultado de la multiplicacion
+// ---reemplazar la fila 2 con el resultado de la resta
+// +++++++++++++++
+// 3- volver a analizar
+// ----------------------------------------------------------------
+// Analizar pseudocigo
+// 1- Ordenar de menor a mayor
+// 2. buscar el primer 1 en la columna deseada
+// si encuentra 
+// ++mandar que si encontró
+// si no encuentra 
+// ++mandar que no encontró
 
   const restaMatriz = (fila1, fila2) => {
     let nuevaFila = []
@@ -28,7 +61,9 @@ export const useFunctions = () => {
     }
     return nuevaFila
   }
-
+  const InvertirMatriz = (matriz) => {
+    return Matrix.inverse(matriz); 
+  }
   const multiplicarMatriz = (fila, numero) => {
     let nuevaFila = []
     for (let x = 0; x < fila.length; x++) {
