@@ -4,7 +4,10 @@ import { Button, Paper, makeStyles, Typography, Box, Grid, FormControlLabel, Swi
 import Card from '../components/visual/Card'
 import { OptionButton } from '../components/visual/Buttons'
 import { motion } from 'framer-motion'
-import Opcion1 from '../components/code/option1'
+import Opcion1 from '../components/code/Opcion1'
+import Opcion2 from '../components/code/Opcion2'
+import Opcion3 from '../components/code/Opcion3'
+import Header from '../components/visual/Header'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +17,20 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   paper: {
-    width: 700
+    width: 700,
+    padding: theme.spacing(2)
+  },
+  paperOp1: {
+    width: 900,
+    padding: theme.spacing(4)
+  },
+  paperOp2: {
+    width: 1050,
+    padding: theme.spacing(4)
+  },
+  paperOp3: {
+    width: 700,
+    padding: theme.spacing(4)
   },
   svg: {
     width: 100,
@@ -29,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const [checked, setChecked] = useState(0)
-  const [showMenu, setShowMenu] = useState(true)
   const classes = useStyles()
 
   const handleChange = (check) => {
@@ -51,12 +66,14 @@ export default function Home() {
                 <Grid container spacing={3} direction="column">
                   <Grid item xs={12}>
                     <OptionButton
+                      fullWidth
                       onClick={() => handleChange(1)}
                       text="Opción 1"
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <OptionButton
+                      fullWidth
                       onClick={() => handleChange(2)}
                       text="Opción 2"
                     />
@@ -64,8 +81,9 @@ export default function Home() {
                   </Grid>
                   <Grid item xs={12}>
                     <OptionButton
+                      fullWidth
                       onClick={() => handleChange(3)}
-                      text="Opción 2"
+                      text="Opción 3"
                     />
                   </Grid>
                 </Grid>
@@ -74,26 +92,30 @@ export default function Home() {
           </Paper>
         </Zoom>
         <Zoom in={checked === 1} mountOnEnter unmountOnExit>
-          <Paper elevation={4} className={classes.paper}>
-            <Opcion1/>
+          <Paper elevation={4} className={classes.paperOp1}>
+            <Header
+              returnMenu={() => handleChange(0)}
+              title="Opcion 1"
+            />
+            <Opcion1 />
           </Paper>
         </Zoom>
         <Zoom in={checked === 2} mountOnEnter unmountOnExit>
-          <Paper elevation={4} className={classes.paper}>
-            <Typography variant="h1" color="initial">Opción 2</Typography>
-            <OptionButton
-              text="Regresar"
-              onClick={() => handleChange(0)}
+          <Paper elevation={4} className={classes.paperOp2}>
+            <Header
+              returnMenu={() => handleChange(0)}
+              title="Opcion 2"
             />
+            <Opcion2 />
           </Paper>
         </Zoom>
         <Zoom in={checked === 3} mountOnEnter unmountOnExit>
-          <Paper elevation={4} className={classes.paper}>
-            <Typography variant="h1" color="initial">Opción 3</Typography>
-            <OptionButton
-              text="Regresar"
-              onClick={() => handleChange(0)}
+          <Paper elevation={4} className={classes.paperOp3}>
+            <Header
+              returnMenu={() => handleChange(0)}
+              title="Opcion 3"
             />
+            <Opcion3 />
           </Paper>
         </Zoom>
       </div>

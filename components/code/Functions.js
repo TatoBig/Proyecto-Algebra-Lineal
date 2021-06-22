@@ -1,6 +1,9 @@
-import { MatrixDependencies } from 'mathjs'
+import { MatrixDependencies, inv, create, all } from 'mathjs'
 import { useState } from 'react'
-import { mathjs } from 'react'
+
+const config = { }
+const math = create(all, config)
+
 export const useFunctions = () => {
   const [identidad3, setidentidad3] = useState([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
   const [identidad4, setidentidad4] = useState([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
@@ -61,16 +64,14 @@ export const useFunctions = () => {
     }
     return nuevaFila
   }
-  const InvertirMatriz = (matriz) => {
-    return Matrix.inverse(matriz); 
+  const invertirMatriz = (matriz) => {
+    return math.inv(matriz)
   }
-  const multiplicarMatriz = (fila, numero) => {
-    let nuevaFila = []
-    for (let x = 0; x < fila.length; x++) {
-      nuevaFila.push(fila[x] * numero)
-    }
-    return nuevaFila
+
+  const multiplicarMatrices = (matrizA, matrizB) => {
+    return math.multiply(matrizAInvertida, matrizB)
   }
+  
   //funcion para reemplazar fila en una matriz
   const reemplazarFila = (matriz, nuevaFila, numeroDeFila) => {
     let nuevaMatriz = []
@@ -84,21 +85,71 @@ export const useFunctions = () => {
     return nuevaMatriz
   }
 
-  const nuevaFuncion = () => {
-    const nuevaFuncion = 'nuevaFuncion'
-    return nuevaFuncion
-  }
   //funciones para resolver las matrices
   //
 
+  const addRows = (row1, row2, invert1, invert2) => {
+    let row3 = []
+
+    row3 = row1.map((item, i) => {
+      return row1[i] * (invert1 ? -1 : 1) + row2[i] * (invert2 ? -1 : 1)
+    })
+
+    return row3
+  }
+
+  const divideRow = (row, value) => {
+    return row.map(item => item / value)
+  }
+
+  const multiplyRow = (row, value) => {
+    return row.map(item => item * value)
+  }
+
+  const fixedPrecisionMatrix = m => {
+    return m.map(item => (
+      [
+        ...item.splice(0, item.length - 1),
+        short(item[item.length - 1], 8)
+      ]
+    ))
+  }
+
+  const short = (n, decimals = 3) => {
+    return Number(n.toFixed(decimals))
+  }
+
+  const solveByGaussJordan = (matrix, i = 0) => {
+    if (i == matrix.length) {
+      return fixedPrecisionMatrix(matrix)
+    }
+
+    let m = [...matrix]
+    let currentRow = m[i]
+    let pivot = currentRow[i]
+
+    m[i] = divideRow(currentRow, pivot)
+
+    m = m.map((item, mapIndex) => {
+      if (mapIndex == i) { // ignore already processed row
+        return item
+      } else {
+        return addRows(multiplyRow(m[i], -item[i]), item)
+      }
+    })
+
+    return solveByGaussJordan(m, i + 1)
+  }
+
   return {
     reemplazarFila,
-    multiplicarMatriz,
+    multiplicarMatrices,
     restaMatriz,
     sumaMatriz,
     setMatriz,
+    invertirMatriz,
     identidad3,
     identidad4,
-    nuevaFuncion
+    solveByGaussJordan
   }
 }

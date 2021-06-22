@@ -1,8 +1,15 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
-import { TextField } from '@material-ui/core'
+import { TextField, Box, makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+  input: {
+    width: 50,
+  }
+}))
 
 export default function FormInput(props) {
+  const classes = useStyles()
   const {
     className,
     control,
