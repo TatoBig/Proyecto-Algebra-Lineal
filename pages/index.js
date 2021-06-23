@@ -66,6 +66,9 @@ export default function Home() {
               <Typography variant="h6" color="initial" align="center">
                 Paolo Giovanni Veliz Sulecio 1543219
               </Typography>
+              <Typography variant="h6" color="initial" align="center">
+                Luis Hervert Damian Martinez 1504419
+              </Typography>
             </Card>
           </Paper>
         </Zoom>
