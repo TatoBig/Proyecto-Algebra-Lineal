@@ -1,46 +1,17 @@
 import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
-import { Button, Paper, makeStyles, Typography, Box, Grid, FormControlLabel, Switch, Slide, Zoom, Grow, Fade, Collapse } from '@material-ui/core/'
+import { Paper, makeStyles, Typography, Box, Grid, Zoom, Divider } from '@material-ui/core/'
 import Card from '../components/visual/Card'
 import { OptionButton } from '../components/visual/Buttons'
 import { motion } from 'framer-motion'
 import Opcion1 from '../components/code/Opcion1'
 import Opcion2 from '../components/code/Opcion2'
 import Opcion3 from '../components/code/Opcion3'
-import Header from '../components/visual/Header'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: 180,
-  },
-  wrapper: {
-    width: '100%',
-  },
-  paper: {
-    width: 700,
-    padding: theme.spacing(2)
-  },
-  paperOp1: {
-    width: 900,
-    padding: theme.spacing(4)
-  },
-  paperOp2: {
-    width: 1050,
-    padding: theme.spacing(4)
-  },
-  paperOp3: {
-    width: 700,
-    padding: theme.spacing(4)
-  },
-  svg: {
-    width: 100,
-    height: 100,
-  },
-  polygon: {
-    fill: theme.palette.common.white,
-    stroke: theme.palette.divider,
-    strokeWidth: 1,
-  },
+  divider: {
+    marginTop: theme.spacing(2)
+  }
 }))
 
 export default function Home() {
@@ -88,36 +59,28 @@ export default function Home() {
                   </Grid>
                 </Grid>
               </Box>
+              <Divider className={classes.divider}/>
+              <Typography variant="h6" color="initial" align="center">
+                Santiago José Navas Maldonado 1551619
+              </Typography>
+              <Typography variant="h6" color="initial" align="center">
+                Paolo Giovanni Veliz Sulecio 1543219
+              </Typography>
             </Card>
           </Paper>
         </Zoom>
-        <Zoom in={checked === 1} mountOnEnter unmountOnExit>
-          <Paper elevation={4} className={classes.paperOp1}>
-            <Header
-              returnMenu={() => handleChange(0)}
-              title="Opcion 1"
-            />
-            <Opcion1 />
-          </Paper>
-        </Zoom>
-        <Zoom in={checked === 2} mountOnEnter unmountOnExit>
-          <Paper elevation={4} className={classes.paperOp2}>
-            <Header
-              returnMenu={() => handleChange(0)}
-              title="Opcion 2"
-            />
-            <Opcion2 />
-          </Paper>
-        </Zoom>
-        <Zoom in={checked === 3} mountOnEnter unmountOnExit>
-          <Paper elevation={4} className={classes.paperOp3}>
-            <Header
-              returnMenu={() => handleChange(0)}
-              title="Opcion 3"
-            />
-            <Opcion3 />
-          </Paper>
-        </Zoom>
+        <Opcion1
+          returnMenu={() => handleChange(0)}
+          checked={checked === 1}
+        />
+        <Opcion2
+          returnMenu={() => handleChange(0)}
+          checked={checked === 2}
+        />
+        <Opcion3
+          returnMenu={() => handleChange(0)}
+          checked={checked === 3}
+        />
       </div>
     </React.Fragment>
   )

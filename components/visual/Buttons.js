@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     color: 'white',
     height: 48,
     padding: '0 30px',
+    marginRight: theme.spacing(2)
   },
   submit: {
     background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
@@ -19,6 +20,7 @@ const useStyles = makeStyles(theme => ({
     color: 'white',
     height: 48,
     padding: '0 30px',
+    marginRight: theme.spacing(2)
   }
 }))
 
